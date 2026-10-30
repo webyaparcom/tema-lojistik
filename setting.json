@@ -1,0 +1,54 @@
+{
+  "order": false,
+  "user": false,
+  "description": {
+    "tr": "Anadolu Hat Lojistik: yurt içi ve yurt dışı nakliye, depolama ve evden eve taşıma; teklif talebi ve yetki belgeleri. (Demo site)",
+    "en": "Anadolu Hat Logistics: domestic and international freight, warehousing and home moves; quote requests and licences. (Demo site)",
+    "ar": "أناضول هات للوجستيات: نقل داخلي ودولي وتخزين ونقل أثاث مع طلب عرض سعر وتراخيص. (موقع تجريبي)"
+  },
+  "keyword": {
+    "tr": "lojistik, nakliye, depolama, taşımacılık",
+    "en": "logistics, freight, warehousing, transport",
+    "ar": "لوجستيات، شحن، تخزين، نقل"
+  },
+  "category": "Kurumsal",
+  "name": "Anadolu Hat Lojistik",
+  "domain": "lojistik.webyapar.com",
+  "langs": {
+    "tr": true,
+    "en": true,
+    "ar": true,
+    "de": false,
+    "ru": false,
+    "es": false,
+    "fr": false,
+    "it": false,
+    "ja": false,
+    "zh": false,
+    "ko": false,
+    "pt": false
+  },
+  "logo": "logo.png",
+  "multi": false,
+  "publishMode": "static",
+  "font": {
+    "body": "source-sans-3",
+    "heading": "montserrat",
+    "ar": {
+      "body": "ibm-plex-sans-arabic",
+      "heading": "noto-kufi-arabic"
+    }
+  },
+  "colorScheme": "auto",
+  "theme_color": "#0B3C6F",
+  "seo": {
+    "noindex": true
+  },
+  "cssTokens": {
+    "--mx-radius-sm": "5px",
+    "--mx-radius-md": "8px",
+    "--mx-radius-lg": "11px",
+    "--mx-radius-xl": "15px"
+  },
+  "icon": "icon.png"
+}
