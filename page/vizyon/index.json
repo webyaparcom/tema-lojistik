@@ -1,0 +1,41 @@
+{
+  "id": "vizyon",
+  "name": {
+    "tr": "Vizyon",
+    "en": "Vision",
+    "ar": "الرؤية"
+  },
+  "description": {
+    "tr": "Vizyonumuz",
+    "en": "Our vision",
+    "ar": "رؤيتنا"
+  },
+  "keyword": {
+    "tr": "",
+    "en": "",
+    "ar": ""
+  },
+  "path": "vizyon",
+  "icon": "visibility",
+  "category": "",
+  "status": "play",
+  "desing": {
+    "header": [],
+    "body": [],
+    "footer": []
+  },
+  "index": 1,
+  "url": "",
+  "text": {
+    "tr": "<h2>Vizyonumuz</h2>\n<p>Bölgenin güvenilir ve şeffaf lojistik ortağı olmak.</p>",
+    "en": "<h2>Our vision</h2>\n<p>To be the region’s trusted and transparent logistics partner.</p>",
+    "ar": "<h2>رؤيتنا</h2>\n<p>أن نكون الشريك اللوجستي الموثوق والشفاف في المنطقة.</p>"
+  },
+  "title": {
+    "tr": "Vizyon",
+    "en": "Vision",
+    "ar": "الرؤية"
+  },
+  "date": "2026-10-30T22:06:04.705Z",
+  "update": "2026-10-30T22:06:05.056Z"
+}
