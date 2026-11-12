@@ -30,6 +30,12 @@
           "tr": "(yeni sekmede açılır)",
           "en": "(opens in a new tab)",
           "ar": "(يفتح في علامة تبويب جديدة)"
+        },
+        "girisHref": "",
+        "girisText": {
+          "tr": "Üye Girişi",
+          "en": "Login",
+          "ar": "تسجيل الدخول"
         }
       },
       "version": "1.0.0",
@@ -1906,7 +1912,12 @@
         "social_media": false,
         "logo_maxh": "60px",
         "logo_plate": false,
-        "contact_line": "auto"
+        "contact_line": "auto",
+        "logoDark": "",
+        "duzen": "",
+        "slogan": "",
+        "ikinciSutun": "",
+        "iletisimNot": ""
       },
       "version": "1.0.0",
       "icon": "widgets",
@@ -3937,16 +3948,16 @@
         },
         "icon2": "description",
         "name3": {
-          "tr": "Güvenli yük",
-          "en": "Safe cargo",
-          "ar": "شحنة آمنة"
+          "tr": "Kayıtlı teslim",
+          "en": "Documented delivery",
+          "ar": "تسليم موثّق"
         },
         "spot3": {
-          "tr": "Yük sigortası ve teslim tutanağı standarttır.",
-          "en": "Cargo insurance and a delivery note are standard.",
-          "ar": "تأمين الشحنة ومحضر التسليم أمران قياسيان."
+          "tr": "Sigorta kapsamı ve teslim tutanağı teklifte açıkça yazılır.",
+          "en": "Insurance cover and the delivery note are stated clearly in the quote.",
+          "ar": "يُذكر نطاق التأمين ومحضر التسليم بوضوح في العرض."
         },
-        "icon3": "shield",
+        "icon3": "task_alt",
         "img": "lojistik-depo.webp",
         "bgcolor": "var(--mx-site-surface-2, #ececea)",
         "fontcolor": "var(--mx-site-text, #1b1b1b)",
