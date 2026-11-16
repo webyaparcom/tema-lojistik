@@ -1,640 +1,87 @@
-<header class="modulex" role="banner">
-  <div class="modulextitle" role="region" aria-label="@language-selector@">
-    <div class="modulextitlebody">
-      <nav class="modulextitlebodylang" aria-label="@language-selector@">
-        <ul role="list">
-          {{langhtml}}
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="modulexChildren">
-    <div class="modulexbody">
-      <a href="/{{lang}}/" aria-label="@home@ - {{web-name}}" title="@home@ - {{web-name}}">
-        <img src="/img/{{logo}}?v={{random}}" class="modulexbodylogo" alt="{{web-name}} Logo" loading="lazy" />
-      </a>
-    </div>
-    <button class="modulexmenumobil" type="button" aria-label="@menu-toggle@" aria-expanded="false" aria-controls="modulexmenulist">
-      <span class="material-symbols-outlined" aria-hidden="true">menu</span>
-    </button>
-    <div class="modulexmenuoverlay" id="modulexmenuoverlay" aria-hidden="true"></div>
-    <nav class="modulexmenulist" id="modulexmenulist" role="navigation" aria-label="@navigation@">
-      <button class="modulexmenuclose" type="button" aria-label="@menu-close@" aria-controls="modulexmenulist">
-        <span class="material-symbols-outlined" aria-hidden="true">close</span>
-      </button>
-      <ul role="menubar">
-        {{html}}
-      </ul>
-      <div class="modulexmenulang" aria-label="@language-selector@">
-        <ul role="list">
-          {{langhtml}}
-        </ul>
-      </div>
-    </nav>
+<header class="modulex-ust-serit{{fbsinif}}" {{fbetiket}}>
+  <div class="modulex-ust-serit-ic">
+    {{fbbas}}
+    {{fbgovde}}
   </div>
 </header>
+
 <style>
-  .modulexmenumobil {
-    display: none;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    padding: 0;
-    margin: 0;
+  /* ust-serit — Hamburger yerine her an görünen kaydırmalı şerit (haber/uygulama dili): mobilde tüm sayfalar tek dokunuş uzaklıkta. */
+  .modulex-ust-serit { box-sizing: border-box; width: 100%; padding: --bosluk-- 20px; background: --bg--; color: --text--; font-size: 1rem; line-height: 1.6; font-family: var(--mx-font-sans, inherit); overflow-wrap: break-word; }
+  .modulex-ust-serit *, .modulex-ust-serit *::before, .modulex-ust-serit *::after { box-sizing: border-box; }
+  /* ham/css.css «* { font-size: 14px }» kalıtımı keser — modül içinde boyut üstten gelsin (ikon yazı tipi hariç) */
+  .modulex-ust-serit :where(*:not(.material-symbols-outlined)) { font-size: inherit; }
+  /* aynı «*» kuralı font-weight 400 · line-height 1.2 · font-family de basar — modül içinde kalıtım */
+  .modulex-ust-serit :where(*:not(.material-symbols-outlined)) { font-weight: inherit; line-height: inherit; font-family: inherit; }
+  .modulex-ust-serit :where(h2, h3, h4, p, ul, ol, li, figure, blockquote, dl, dd) { margin: 0; }
+  .modulex-ust-serit :where(ul, ol) { padding: 0; list-style: none; }
+  .modulex-ust-serit img { display: block; max-width: 100%; }
+  /* <img width height> öznitelik yüksekliği CSS aspect-ratio'yu ezer — sıfır özgüllükle auto (modül sınıfının height'ı yine kazanır) */
+  :where(.modulex-ust-serit) img { height: auto; }
+  .modulex-ust-serit [hidden] { display: none !important; }
+  .modulex-ust-serit :where(a, button, summary, [data-cevir]) { cursor: pointer; }
+  .modulex-ust-serit :where(a, button, summary, [tabindex]):focus-visible { outline: 3px solid --accent--; outline-offset: 3px; }
+  .modulex-ust-serit-ic { max-width: --max--; margin-inline: auto; }
+  .modulex-ust-serit-bas { display: grid; gap: 12px; margin-block-end: clamp(32px, 4vw, 52px); }
+  .modulex-ust-serit--bassiz .modulex-ust-serit-bas { display: none; }
+  .modulex-ust-serit-ust { color: --accentInk--; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+  .modulex-ust-serit-baslik { font-family: var(--mx-font-heading, inherit); font-size: clamp(1.8rem, 3.4vw, 2.8rem); font-weight: 750; letter-spacing: -0.025em; line-height: 1.1; }
+  .modulex-ust-serit-metin { color: --muted--; font-size: 1.05rem; line-height: 1.7; }
+  .modulex-ust-serit-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 8px; }
+  .modulex-ust-serit-dugme { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 12px 22px; border: 2px solid --accent--; border-radius: 999px; background: --accent--; color: --accentText--; font-weight: 700; text-decoration: none; transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease; }
+  .modulex-ust-serit-dugme:hover { transform: translateY(-2px); }
+  .modulex-ust-serit-dugme--ikincil { background: transparent; color: --text--; border-color: --cizgi--; }
+  .modulex-ust-serit-dugme--ikincil:hover { border-color: --accent--; }
+  .modulex-ust-serit-dugme .material-symbols-outlined { font-size: 20px; }
+
+  .modulex-ust-serit { position: relative; z-index: 900; }
+  .modulex-ust-serit-logo { display: inline-flex; flex: 0 1 auto; min-width: 0; align-items: center; color: inherit; text-decoration: none; }
+  /* dar ekranda geniş logo/uzun ad çubuğu taşırmasın: logo daralır (img max-width 100%), ad sarar */
+  .modulex-ust-serit-logo img { width: auto; max-height: --logoH--; }
+  .modulex-ust-serit-ad { font-family: var(--mx-font-heading, inherit); font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .modulex-ust-serit-oge { position: relative; display: inline-flex; align-items: center; min-height: 44px; color: inherit; font-weight: 600; text-decoration: none; transition: color 0.2s ease, background 0.2s ease; }
+  .modulex-ust-serit-oge:hover, .modulex-ust-serit-oge[aria-current="page"] { color: --accentInk--; }
+  .modulex-ust-serit-cta { display: inline-flex; flex: none; align-items: center; gap: 6px; min-height: 44px; padding: 8px 18px; border-radius: 999px; background: --accent--; color: --accentText--; font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .modulex-ust-serit-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -12px --accent--; }
+  .modulex-ust-serit-cta .material-symbols-outlined, .modulex-ust-serit-tel .material-symbols-outlined, .modulex-ust-serit-posta .material-symbols-outlined { font-size: 18px; }
+  .modulex-ust-serit-tel, .modulex-ust-serit-posta { display: inline-flex; align-items: center; gap: 6px; color: inherit; text-decoration: none; white-space: nowrap; }
+  .modulex-ust-serit-tel:hover, .modulex-ust-serit-posta:hover { color: --accentInk--; }
+  .modulex-ust-serit-dil:empty { display: none; }
+  .modulex-ust-serit-ac { display: none; align-items: center; gap: 10px; min-width: 46px; min-height: 46px; padding: 0 12px; border: 1px solid --cizgi--; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-weight: 700; }
+  .modulex-ust-serit-ac-ikon { display: grid; gap: 4px; width: 20px; }
+  .modulex-ust-serit-ac-ikon span { display: block; height: 2px; border-radius: 2px; background: currentColor; transition: transform 0.3s ease, opacity 0.3s ease; }
+  .modulex-ust-serit--acik .modulex-ust-serit-ac-ikon span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .modulex-ust-serit--acik .modulex-ust-serit-ac-ikon span:nth-child(2) { opacity: 0; }
+  .modulex-ust-serit--acik .modulex-ust-serit-ac-ikon span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .modulex-ust-serit-kapat { display: inline-grid; place-items: center; width: 46px; height: 46px; border: 1px solid --cizgi--; border-radius: 50%; background: transparent; color: inherit; }
+  .modulex-ust-serit-perde { position: fixed; inset: 0; z-index: 1; background: color-mix(in srgb, --text-- 45%, transparent); animation: modulex-ust-serit-sol 0.3s ease both; }
+  @keyframes modulex-ust-serit-sol { from { opacity: 0; } to { opacity: 1; } }
+
+  .modulex-ust-serit-cubuk { display: flex; align-items: center; justify-content: space-between; gap: 12px 28px; padding-block: 14px; }
+  .modulex-ust-serit-nav { min-width: 0; }
+  .modulex-ust-serit-liste { display: flex; flex-wrap: wrap; gap: 4px 26px; }
+  .modulex-ust-serit-son { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; }
+  @media (max-width: 1024px) {
+    .modulex-ust-serit-cubuk { flex-wrap: wrap; padding-block-end: 0; }
+    .modulex-ust-serit-nav { flex: 1 0 100%; order: 3; margin-inline: -20px; -webkit-mask-image: linear-gradient(90deg, transparent, black 20px, black calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, transparent, black 20px, black calc(100% - 28px), transparent); }
+    .modulex-ust-serit-liste { flex-wrap: nowrap; gap: 8px; padding: 2px 20px 12px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+    .modulex-ust-serit-liste::-webkit-scrollbar { display: none; }
+    .modulex-ust-serit-liste li { flex: none; scroll-snap-align: start; }
+    .modulex-ust-serit-liste .modulex-ust-serit-oge { min-height: 40px; padding: 6px 16px; border: 1px solid --cizgi--; border-radius: 999px; font-size: 0.95rem; white-space: nowrap; }
+    .modulex-ust-serit-liste .modulex-ust-serit-oge[aria-current="page"] { border-color: --accent--; background: --accent--; color: --accentText--; }
   }
-  
-  .modulexmenumobil:focus {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
-
-  .modulexChildren {
-    display: flex;
-    width: var(--max);
-    gap: 15px;
-    align-items: end;
-    justify-content: space-between;
-  }
-
-  .modulex {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: --background-color--;
-  }
-
-  .modulextitle {
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modulextitlebody {
-    width: var(--max);
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 0px 10px 0px;
-  }
-
-  .modulextitlebodytitle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-  }
-
-  .modulextitlebodylang {
-    width: auto;
-    margin: -5px 0px -5px 0px;
-  }
-
-  .modulextitlebodylang ul {
-    display: flex;
-    gap: 15px;
-  }
-
-  .modulextitlebodylang ul li {
-    list-style: none;
-    margin: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .modulextitlebodylang ul a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px !important;
-    aspect-ratio: 1/1;
-    border-radius: 5px;
-    background-color: #333;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    padding: 4px;
-    cursor: pointer;
-  }
-  
-  .modulextitlebodylang ul a:focus {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
-  }
-  
-  .modulextitlebodylang ul a:hover {
-    background-color: #fff;
-    color: #333;
-  }
-  .modulextitlebodylang ul a:active {
-    background-color: #333;
-    color: #fff;
-  }
-  .modulextitlebodylang ul a:focus {
-    background-color: #333;
-    color: #fff;
-  }
-  .modulextitlebodylang ul a:visited {
-    background-color: #333;
-    color: #fff;
-  }
-  .modulextitlebodylang ul a:link {
-    background-color: #333;
-    color: #fff;
-  }
-
-  .modulexbody {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px 0px 5px 0px;
-  }
-
-  /* 31 Eki 2026: zemin --menubg-- (eski: --color-- yazı rengi anahtarı zemin olarak kullanılıyordu; koyu modda kontrast 1.05).
-     back.js menubg boşsa color değerini atar → eski siteler aynen. */
-  .modulexmenulist {
-    display: block;
-    background-color: --menubg--;
-    color: --menutext--;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .modulexmenubody {
-    width: 100%;
-    background-color: --menubg--;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modulexmenulist ul {
-    width: 100%;
-    list-style-type: none;
-    display: flex;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-    overflow-x: auto;
-  }
-
-  .modulexmenulist ul a {
-    padding: 8px;
-    font-size: 16px;
-    color: --menutext--;
-    width: 100%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-  
-  .modulexmenulist ul a:focus {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-    border-radius: 5px;
-  }
-
-  .modulexmenulist ul a:hover {
-    background-color: --menuhoverbg--;
-    border-radius: 5px;
-    color: --menutext--;
-    cursor: pointer;
-  }
-
-  .modulexmenuitem {
-    padding: 8px;
-    font-size: 16px;
-    color: --menutext--;
-    width: 100%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    white-space: nowrap;
-  }
-
-  .modulexmenuactive {
-    background-color: --menuhoverbg-- !important;
-    border-radius: 5px;
-    color: --menutext-- !important;
-    font-weight: bold;
-  }
-
-  .modulexbodylogo {
-    display: block;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: --height--;
-    object-fit: contain;
-    object-position: left center;
-    flex-shrink: 0;
-  }
-
-  /* SVG logo korumasi (2026-09-12): intrinsic boyutu OLMAYAN bir SVG
-     (yalniz viewBox) `height:auto` ile flex icinde 0'a coker ve logo
-     GORUNMEZ. `max-height` yetmez -- ust sinirdir, olcu vermez.
-     Yukseklik bu modulun KENDI tasarim tavanindan alindi. */
-  .modulexbodylogo[src*=".svg"] {
-    height: 60px;
-    width: auto;
-  }
-
-  .modulexbody > a {
-    display: inline-flex;
-    align-items: center;
-    max-width: min(90vw, 320px);
-    min-width: 0;
-    flex-shrink: 1;
-    overflow: hidden;
-  }
-
-  @media screen and (min-width: 1024px) {
-    .modulexmenumobil {
-      display: none !important;
-    }
-
-    .modulexmenuoverlay {
-      display: none !important;
-    }
-
-    .modulexmenuclose {
-      display: none !important;
-    }
-
-    /* Desktop'ta menü içindeki dil seçicisini gizle */
-    .modulexmenulang {
-      display: none !important;
-    }
-
-    .modulexmenulist {
-      position: static !important;
-      display: flex !important;
-      width: auto !important;
-      max-width: none !important;
-      height: auto !important;
-      right: auto !important;
-      transform: none !important;
-      border-radius: 5px !important;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-      overflow: visible !important;
-      flex-direction: row !important;
-    }
-
-    .modulexmenulist ul {
-      flex-direction: row !important;
-      flex: none !important;
-    }
-
-    .modulexmenulist ul a {
-      padding: 8px !important;
-      text-align: center !important;
-      border-bottom: none !important;
-    }
-  }
-
-  @media screen and (max-width: 1024px) {
-    /* Mobilde üstteki dil seçicisini gizle */
-    .modulextitle {
-      display: none;
-    }
-
-    .modulexmenumobil {
-      display: flex;
-      align-items: center;
-      justify-content: start; /* mobil uygulama kuralı: hamburger solda (RTL'de ayna), çekmece de soldan açılır */
-      min-height: 48px;
-      background-color: --menubg--;
-      color: --menutext--;
-      width: 100%;
-    }
-
-    .modulexmenumobil span {
-      font-size: 32px;
-      color: --menutext--;
-      padding: 5px;
-    }
-
-    /* Overlay/Backdrop */
-    .modulexmenuoverlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 9998;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .modulexmenuoverlay.active {
-      display: block;
-      opacity: 1;
-    }
-
-    /* Slide-in Menü: SOLDAN açılır (kural 11 Kas 2026; RTL'de aynası) */
-    .modulexmenulist {
-      position: fixed;
-      top: 0;
-      inset-inline-start: 0;
-      transform: translateX(calc(-100% - 16px));
-      width: 80%;
-      max-width: 320px;
-      height: 100%;
-      background-color: --menubg--;
-      padding: 0;
-      border-radius: 0;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-      z-index: 10000000;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease;
-      overflow-y: auto;
-    }
-
-    [dir="rtl"] .modulexmenulist {
-      transform: translateX(calc(100% + 16px));
-    }
-
-    .modulexmenulist.active,
-    [dir="rtl"] .modulexmenulist.active {
-      transform: none;
-    }
-
-    /* Kapatma Butonu */
-    .modulexmenuclose {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      min-height: 48px;
-      min-width: 48px;
-      padding: 15px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      color: --menutext--;
-      font-size: 28px;
-    }
-
-    .modulexmenuclose span {
-      font-size: 28px;
-      color: --menutext--;
-    }
-
-    .modulexmenuclose:focus {
-      outline: 2px solid currentColor;
-      outline-offset: -2px;
-    }
-
-    .modulexmenulist ul {
-      flex-direction: column;
-      padding: 10px 0;
-      margin: 0;
-      gap: 0;
-      flex: 1;
-    }
-
-    .modulexmenulist ul a {
-      padding: 15px 20px;
-      min-height: 48px;
-      box-sizing: border-box;
-      text-align: left;
-      border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
-    }
-
-    /* Menü içindeki dil seçici - en alta */
-    .modulexmenulang {
-      margin-top: auto;
-      padding: 20px;
-      border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent);
-      background-color: color-mix(in srgb, currentColor 6%, transparent);
-    }
-
-    .modulexmenulang ul {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      padding: 0;
-      margin: 0;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .modulexmenulang ul a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 48px;
-      min-height: 48px;
-    }
-
-    .modulexmenulang ul li {
-      list-style: none;
-      margin: 0;
-    }
-
-    .modulexmenulang ul a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 35px;
-      height: 35px;
-      color: --menutext--;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
-      border-radius: 5px;
-      background-color: color-mix(in srgb, currentColor 10%, transparent);
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-      text-transform: uppercase;
-      padding: 0;
-      border-bottom: none;
-      cursor: pointer;
-    }
-
-    .modulexmenulang ul a:hover {
-      background-color: --menuhoverbg--;
-      border-color: color-mix(in srgb, currentColor 50%, transparent);
-    }
-
-    .modulexmenulang ul a:focus {
-      outline: 2px solid currentColor;
-      outline-offset: 2px;
-    }
-
-    .modulexmenulang ul a[aria-current="true"] {
-      background-color: --menuhoverbg--;
-      border-color: currentColor;
-      font-weight: bold;
-    }
-
-    .modulexbody {
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .modulexChildren {
-      width: 100%;
-      gap: 0px;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modulexmenu {
-      overflow-x: auto;
-    }
-
-    .modulexbody > a {
-      max-width: min(50vw, 220px);
-    }
-
-    .modulexbodylogo {
-      max-width: min(50vw, 220px);
-      height: auto;
-      max-height: 80px;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    .modulexmenulist ul a {
-      font-size: 14px;
-    }
-
-    .modulexbody > a {
-      max-width: min(40vw, 180px);
-    }
-
-    .modulexbodylogo {
-      max-width: min(40vw, 180px);
-      height: auto;
-      max-height: 70px;
-    }
-  }
-
-  /* W2: mobil tasma kontrolu */
   @media (max-width: 768px) {
-    [class*="modulex"] {
-      max-width: 100%;
-      box-sizing: border-box;
-    }
+    .modulex-ust-serit-nav { margin-inline: -16px; }
+    .modulex-ust-serit-liste { padding-inline: 16px; }
+    .modulex-ust-serit-son .modulex-ust-serit-cta { min-height: 40px; padding: 6px 14px; font-size: 0.9rem; }
   }
 
-  /* W2: erisilebilirlik — animasyon kapatma */
+  :is([lang="ar"], [lang="fa"], [lang="he"], [lang="ur"]) .modulex-ust-serit :is(.modulex-ust-serit-baslik, .modulex-ust-serit-ust, h3, h4, strong) { letter-spacing: 0; }
+  :is([lang="ar"], [lang="fa"], [lang="he"], [lang="ur"]) .modulex-ust-serit-baslik { line-height: 1.35; }
+  @media (max-width: 768px) {
+    .modulex-ust-serit { padding-inline: 16px; }
+  }
   @media (prefers-reduced-motion: reduce) {
-    [class*="modulex"],
-    [class*="modulex"] * {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-
-  /* 8 Kas 2026: logo gorseli acik zemin icin cizilmis (koyu yazi, saydam); koyu modda koyu header uzerinde 1:1 kayboluyordu (saas 'Akispano').
-     Koyu modda logoya acik plaka. */
-  @media (prefers-color-scheme: dark) {
-    .modulexbodylogo {
-      background: #ffffff;
-      padding: 4px 10px;
-      border-radius: 8px;
-      box-sizing: content-box;
-    }
+    .modulex-ust-serit *, .modulex-ust-serit *::before, .modulex-ust-serit *::after { animation: none !important; transition: none !important; }
   }
 </style>
-<script>
-  setTimeout(function() {
-    var menuButton = document.querySelector(".modulexmenumobil");
-    var menu = document.querySelector(".modulexmenulist");
-    var overlay = document.querySelector(".modulexmenuoverlay");
-    var closeButton = document.querySelector(".modulexmenuclose");
-    
-    //
-    function openMenu() {
-      if (menu && overlay) {
-        menu.classList.add("active");
-        overlay.classList.add("active");
-        overlay.setAttribute("aria-hidden", "false");
-        if (menuButton) {
-          menuButton.setAttribute("aria-expanded", "true");
-        }
-        // Body scroll'u engelle
-        document.body.style.overflow = "hidden";
-      }
-    }
-    
-    function closeMenu() {
-      if (menu && overlay) {
-        menu.classList.remove("active");
-        overlay.classList.remove("active");
-        overlay.setAttribute("aria-hidden", "true");
-        if (menuButton) {
-          menuButton.setAttribute("aria-expanded", "false");
-        }
-        // Body scroll'u geri getir
-        document.body.style.overflow = "";
-        //
-        if (menuButton) {
-          menuButton.focus();
-        }
-      }
-    }
-    
-    if (menuButton && menu && overlay) {
-      //
-      menuButton.addEventListener("click", function () {
-        var isExpanded = menuButton.getAttribute("aria-expanded") === "true";
-        if (isExpanded) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
-      
-      // Kapatma butonu
-      if (closeButton) {
-        closeButton.addEventListener("click", function () {
-          closeMenu();
-        });
-      }
-      
-      //
-      overlay.addEventListener("click", function () {
-        closeMenu();
-      });
-      
-      // Klavye navigasyonu (Enter ve Space)
-      menuButton.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          var isExpanded = menuButton.getAttribute("aria-expanded") === "true";
-          if (isExpanded) {
-            closeMenu();
-          } else {
-            openMenu();
-          }
-        }
-      });
-      
-      //
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && menuButton.getAttribute("aria-expanded") === "true") {
-          closeMenu();
-        }
-      });
-    }
-  }, 100);
-</script>
